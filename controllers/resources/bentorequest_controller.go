@@ -1124,6 +1124,12 @@ func (r *BentoRequestReconciler) getBuildArgs(ctx context.Context, bentoRequest 
 	configCm := &corev1.ConfigMap{}
 	err = r.Get(ctx, types.NamespacedName{Name: configCmName, Namespace: configNamespace}, configCm)
 	configCmIsNotFound := k8serrors.IsNotFound(err)
+
+	if configCmIsNotFound {
+		err = nil
+		return
+	}
+
 	if err != nil && !configCmIsNotFound {
 		err = errors.Wrap(err, "failed to get configmap")
 		return
