@@ -1941,7 +1941,7 @@ echo "Done"
 			if cacheRepo == "" {
 				cacheRepo = opt.ImageInfo.DockerRegistry.BentosRepositoryURIInCluster
 			}
-			args = append(args, "--export-cache", fmt.Sprintf("type=registry,ref=%s:buildcache,mode=max,compression=zstd,ignore-error=true", cacheRepo))
+			args = append(args, "--export-cache", fmt.Sprintf("type=registry,ref=%s:buildcache,mode=max,compression=zstd,ignore-error=true,image-manifest=true", cacheRepo))
 			args = append(args, "--import-cache", fmt.Sprintf("type=registry,ref=%s:buildcache", cacheRepo))
 		}
 	}
